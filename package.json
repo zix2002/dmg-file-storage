@@ -1,6 +1,6 @@
 {
   "name": "dmg-file-storage",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "umijs mock help",
   "main": "./dist/src/index.js",
   "scripts": {

@@ -6,10 +6,10 @@ export interface Store {
 }
 
 const FileStorage = {
-  fullPath: '',
-  conditionWhere: {},
-  conditionSort: 'id',
-  conditionOrder: 'desc',
+  fullPath: '', // 存储的全路径
+  conditionWhere: {}, // 过滤条件
+  conditionSort: 'id', // 排序字段
+  conditionOrder: 'desc', // 排序规则
   file(filename: string) {
     this.fullPath = `${process.cwd()}/cache/${filename}`;
     this.conditionWhere = {};
@@ -17,10 +17,12 @@ const FileStorage = {
     this.conditionOrder = 'desc';
     return this;
   },
+  // 将数据保存到文件
   setItem(data: Store | Store[]) {
     fs.writeFileSync(this.fullPath, JSON.stringify(data));
     return this;
   },
+  // 从文件中获取数据
   getItem(): Store | Store[] | null {
     if (fs.existsSync(this.fullPath)) {
       const fileContent = fs.readFileSync(this.fullPath, 'utf8');
@@ -28,19 +30,21 @@ const FileStorage = {
     }
     return null;
   },
+  // 设置排序
   orderBy(sort: string, order: string = 'desc') {
     this.conditionSort = sort;
     this.conditionOrder = order;
     return this;
   },
+  // 设置过滤条件
   where(where: Store) {
     this.conditionWhere = where;
     return this;
   },
-
+  // 设置分页
   paginate(pageSize: number = 10, page: number = 1): Store {
     const data = this.search();
-    const chunkData = lodash.chunk(this.search(), pageSize);
+    const chunkData = lodash.chunk(data, pageSize);
     const result = chunkData[page - 1] || [];
     return {
       data: result,
@@ -51,7 +55,6 @@ const FileStorage = {
       },
     };
   },
-
   // 搜索
   search(): Store[] {
     const data = this.getItem();
@@ -62,8 +65,7 @@ const FileStorage = {
     }
     return [];
   },
-
-  // 按键值查询单个
+  // 按按条件查询单个
   find(): Store | null | undefined {
     const data = this.getItem();
     if (data && Array.isArray(data)) {
@@ -72,7 +74,6 @@ const FileStorage = {
     }
     return null;
   },
-
   // 添加
   create(item: Store, pk: string = 'id'): Store | null {
     const data = this.getItem();
@@ -112,7 +113,7 @@ const FileStorage = {
 
     return null;
   },
-
+  // 删除单个
   destroy(): boolean {
     const data = this.getItem();
     if (data && Array.isArray(data)) {
