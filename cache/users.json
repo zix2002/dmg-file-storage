@@ -1,1 +1,52 @@
-{"a":1}
+[
+  {
+    "id": 1,
+    "username": "Donald",
+    "nickname": "乔丽"
+  },
+  {
+    "id": 2,
+    "username": "Paul",
+    "nickname": "赵秀兰"
+  },
+  {
+    "id": 3,
+    "username": "Mark",
+    "nickname": "曾涛"
+  },
+  {
+    "id": 4,
+    "username": "Carol",
+    "nickname": "谢杰"
+  },
+  {
+    "id": 5,
+    "username": "Linda",
+    "nickname": "万超"
+  },
+  {
+    "id": 6,
+    "username": "Robert",
+    "nickname": "吴艳"
+  },
+  {
+    "id": 7,
+    "username": "Joseph",
+    "nickname": "毛军"
+  },
+  {
+    "id": 8,
+    "username": "Maria",
+    "nickname": "万静"
+  },
+  {
+    "id": 9,
+    "username": "Melissa",
+    "nickname": "郝杰"
+  },
+  {
+    "id": 10,
+    "username": "Michael",
+    "nickname": "邓刚"
+  }
+]
