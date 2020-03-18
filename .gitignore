@@ -2,3 +2,4 @@
 *.log
 /.git/
 /.idea
+/package-lock.json
