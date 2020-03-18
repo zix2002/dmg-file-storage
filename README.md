@@ -62,7 +62,7 @@ fileStorage
 
 - `search` 查询，配合`where`和`orderBy`使用，示例同上
 
-- `pagination`,分页查询，配合`where`和`orderBy`使用
+- `paginate`,分页查询，配合`where`和`orderBy`使用
 
 ```js
 const page = 1; // 1 是默认值
@@ -70,7 +70,7 @@ const pageSize = 10;
 fileStorage
   .file('users.json')
   .orderBy('id', 'desc')
-  .pagination(pageSize, page);
+  .paginate(pageSize, page);
 ```
 
 - `find` 查询单条

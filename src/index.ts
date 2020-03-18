@@ -38,7 +38,7 @@ const FileStorage = {
     return this;
   },
 
-  pagination(pageSize: number = 10, page: number = 1): Store {
+  paginate(pageSize: number = 10, page: number = 1): Store {
     const data = this.search();
     const chunkData = lodash.chunk(this.search(), pageSize);
     const result = chunkData[page - 1] || [];

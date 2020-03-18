@@ -49,7 +49,7 @@ var FileStorage = {
         this.conditionWhere = where;
         return this;
     },
-    pagination: function (pageSize, page) {
+    paginate: function (pageSize, page) {
         if (pageSize === void 0) { pageSize = 10; }
         if (page === void 0) { page = 1; }
         var data = this.search();

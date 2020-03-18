@@ -11,7 +11,7 @@ declare const FileStorage: {
     getItem(): Store | Store[] | null;
     orderBy(sort: string, order?: string): any;
     where(where: Store): any;
-    pagination(pageSize?: number, page?: number): Store;
+    paginate(pageSize?: number, page?: number): Store;
     search(): Store[];
     find(): Store | null | undefined;
     create(item: Store, pk?: string): Store | null;
