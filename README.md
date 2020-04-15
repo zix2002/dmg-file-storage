@@ -116,6 +116,17 @@ fileStorage
   .destroy();
 ```
 
+- getTree 将 2 维数组转为树形结构
+  - 默认检查`parentId`
+  - 子数据为`children`
+
+```js
+fileStorage
+  .file('groups.json')
+  .orderBy('sort', 'asc')
+  .getTree();
+```
+
 ## 如何配合`umijs` 的 mock
 
 - 先建立一个路由，例如：`/api/seed/users`

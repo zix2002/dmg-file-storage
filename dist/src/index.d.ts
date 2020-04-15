@@ -1,3 +1,4 @@
+import { TreeDataType } from './lib/tree';
 export interface Store {
     [name: string]: any;
 }
@@ -17,5 +18,6 @@ declare const FileStorage: {
     create(item: Store, pk?: string): Store | null;
     update(item: Store): Store | null;
     destroy(): boolean;
+    getTree(): TreeDataType[];
 };
 export default FileStorage;

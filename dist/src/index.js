@@ -16,6 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = __importDefault(require("fs"));
 var lodash_1 = __importDefault(require("lodash"));
+var tree_1 = require("./lib/tree");
 var FileStorage = {
     fullPath: '',
     conditionWhere: {},
@@ -28,10 +29,12 @@ var FileStorage = {
         this.conditionOrder = 'desc';
         return this;
     },
+    // 将数据保存到文件
     setItem: function (data) {
         fs_1.default.writeFileSync(this.fullPath, JSON.stringify(data));
         return this;
     },
+    // 从文件中获取数据
     getItem: function () {
         if (fs_1.default.existsSync(this.fullPath)) {
             var fileContent = fs_1.default.readFileSync(this.fullPath, 'utf8');
@@ -39,21 +42,24 @@ var FileStorage = {
         }
         return null;
     },
+    // 设置排序
     orderBy: function (sort, order) {
         if (order === void 0) { order = 'desc'; }
         this.conditionSort = sort;
         this.conditionOrder = order;
         return this;
     },
+    // 设置过滤条件
     where: function (where) {
         this.conditionWhere = where;
         return this;
     },
+    // 设置分页
     paginate: function (pageSize, page) {
         if (pageSize === void 0) { pageSize = 10; }
         if (page === void 0) { page = 1; }
         var data = this.search();
-        var chunkData = lodash_1.default.chunk(this.search(), pageSize);
+        var chunkData = lodash_1.default.chunk(data, pageSize);
         var result = chunkData[page - 1] || [];
         return {
             data: result,
@@ -74,7 +80,7 @@ var FileStorage = {
         }
         return [];
     },
-    // 按键值查询单个
+    // 按按条件查询单个
     find: function () {
         var data = this.getItem();
         if (data && Array.isArray(data)) {
@@ -117,6 +123,7 @@ var FileStorage = {
         }
         return null;
     },
+    // 删除单个
     destroy: function () {
         var data = this.getItem();
         if (data && Array.isArray(data)) {
@@ -131,6 +138,15 @@ var FileStorage = {
             return true;
         }
         return false;
+    },
+    getTree: function () {
+        var data = this.getItem();
+        if (data && Array.isArray(data)) {
+            // @ts-ignore
+            var orderData = lodash_1.default.orderBy(data, this.conditionSort, this.conditionOrder);
+            return tree_1.flattenToTree(orderData);
+        }
+        return [];
     },
 };
 exports.default = FileStorage;

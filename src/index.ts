@@ -1,5 +1,6 @@
 import fs from 'fs';
 import lodash from 'lodash';
+import { flattenToTree, TreeDataType } from './lib/tree';
 
 export interface Store {
   [name: string]: any;
@@ -65,6 +66,7 @@ const FileStorage = {
     }
     return [];
   },
+
   // 按按条件查询单个
   find(): Store | null | undefined {
     const data = this.getItem();
@@ -129,6 +131,15 @@ const FileStorage = {
       return true;
     }
     return false;
+  },
+  getTree(): TreeDataType[] {
+    const data = this.getItem();
+    if (data && Array.isArray(data)) {
+      // @ts-ignore
+      const orderData = lodash.orderBy(data, this.conditionSort, this.conditionOrder) as TreeDataType[];
+      return flattenToTree(orderData);
+    }
+    return [];
   },
 };
 
