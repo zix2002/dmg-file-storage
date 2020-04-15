@@ -1,13 +1,7 @@
+import { TreeDataType } from './lib/tree';
 export interface Store {
     [name: string]: any;
 }
-export interface TreeDataType {
-    id: number;
-    parentId: number | null;
-    [name: string]: any;
-    children?: TreeDataType[];
-}
-export declare const flattenToTree: (flattenData: TreeDataType[]) => TreeDataType[];
 declare const FileStorage: {
     fullPath: string;
     conditionWhere: {};

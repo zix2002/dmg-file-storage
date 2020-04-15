@@ -16,25 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = __importDefault(require("fs"));
 var lodash_1 = __importDefault(require("lodash"));
-exports.flattenToTree = function (flattenData) {
-    var buildTree = function (parentId) {
-        if (parentId === void 0) { parentId = null; }
-        var currentLevelData = flattenData.filter(function (item) { return item.parentId === parentId; });
-        if (currentLevelData.length > 0) {
-            return currentLevelData.map(function (item) {
-                var children = buildTree(item.id);
-                if (children.length > 0) {
-                    return __assign(__assign({}, item), { children: children });
-                }
-                else {
-                    return __assign({}, item);
-                }
-            });
-        }
-        return currentLevelData;
-    };
-    return buildTree();
-};
+var tree_1 = require("./lib/tree");
 var FileStorage = {
     fullPath: '',
     conditionWhere: {},
@@ -162,7 +144,7 @@ var FileStorage = {
         if (data && Array.isArray(data)) {
             // @ts-ignore
             var orderData = lodash_1.default.orderBy(data, this.conditionSort, this.conditionOrder);
-            return exports.flattenToTree(orderData);
+            return tree_1.flattenToTree(orderData);
         }
         return [];
     },

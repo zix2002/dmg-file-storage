@@ -23,8 +23,3 @@ export const flattenToTree = (flattenData: TreeDataType[]): TreeDataType[] => {
 
   return buildTree();
 };
-
-// export const treeToFlatten = (treeData: any[]) => {
-//   const flattenData = [];
-//   return flattenData;
-// };
